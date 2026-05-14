@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.env/
+.venv/
+env/
+venv/
+
+# Local/editor files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Hugging Face / model caches
+.cache/
+models/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.onnx
+
+# Generated datasets and outputs
+ready/random*/
+ready/pgd*/
+ready/*_whisper_large_v3.csv
+ready/*_qwen2_audio_answers.csv
+
+# Bundled/generated tool artifacts
+ready/tools/
+ready/piper/
+*.tar.gz

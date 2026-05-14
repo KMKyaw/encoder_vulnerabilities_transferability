@@ -1,0 +1,81 @@
+id,category,question,answer,answer_type,difficulty
+digit_code_01,digit_code,The locker code is 482 today,What is the locker code,482,digit_code,easy
+digit_code_02,digit_code,Room 317 is ready after lunch,Which room is ready,317,room_number,easy
+digit_code_03,digit_code,My ticket number is 904,What is the ticket number,904,ticket_number,easy
+digit_code_04,digit_code,Use gate code 621 for entry,What gate code should be used,621,digit_code,easy
+digit_code_05,digit_code,The box label says B24,What does the box label say,B24,alphanumeric_id,easy
+digit_code_06,digit_code,Our table number is 56A tonight,What is the table number,56A,alphanumeric_id,easy
+digit_code_07,digit_code,The shelf code reads 738,What code reads on the shelf,738,digit_code,easy
+digit_code_08,digit_code,Her badge number is 215,What is her badge number,215,digit_code,easy
+digit_code_09,digit_code,The pickup tag is C19,What is the pickup tag,C19,alphanumeric_id,easy
+digit_code_10,digit_code,Please remember door code 8642,What door code should be remembered,8642,digit_code,medium
+digit_code_11,digit_code,The order slip shows 4091,What number does the order slip show,4091,digit_code,medium
+digit_code_12,digit_code,Bus stop number 782 is nearby,Which bus stop number is nearby,782,digit_code,easy
+digit_code_13,digit_code,The crate mark is D72,What is the crate mark,D72,alphanumeric_id,easy
+digit_code_14,digit_code,Use room 146 for art club,What room is for art club,146,room_number,easy
+digit_code_15,digit_code,The quiz access pin is 530,What is the quiz access pin,530,digit_code,easy
+digit_code_16,digit_code,The receipt code ends with 291,What does the receipt code end with,291,digit_code,medium
+digit_code_17,digit_code,Her cubby number is 624,What is her cubby number,624,digit_code,easy
+digit_code_18,digit_code,The locker tag reads E38,What does the locker tag read,E38,alphanumeric_id,easy
+digit_code_19,digit_code,Our lane number is 907,What is our lane number,907,digit_code,easy
+digit_code_20,digit_code,The class code is 1184,What is the class code,1184,digit_code,medium
+time_date_01,time_date,The meeting starts at nine tomorrow,When does the meeting start,nine,time,easy
+time_date_02,time_date,We visit the park on Tuesday,What day do we visit the park,Tuesday,weekday,easy
+time_date_03,time_date,The sale begins in April,When does the sale begin,April,month,easy
+time_date_04,time_date,Class ends at three thirty today,When does class end,three thirty,time,easy
+time_date_05,time_date,The picnic is planned for Saturday,What day is the picnic planned,Saturday,weekday,easy
+time_date_06,time_date,Her lesson begins at noon,When does her lesson begin,noon,time,easy
+time_date_07,time_date,The shop opens at seven,When does the shop open,seven,time,easy
+time_date_08,time_date,We return home on Friday,What day do we return home,Friday,weekday,easy
+time_date_09,time_date,The fair starts in June,When does the fair start,June,month,easy
+time_date_10,time_date,Dinner is ready at six fifteen,When is dinner ready,six fifteen,time,medium
+time_date_11,time_date,The library closes at eight,When does the library close,eight,time,easy
+time_date_12,time_date,Our trip begins on Monday,What day does our trip begin,Monday,weekday,easy
+time_date_13,time_date,The concert is scheduled for July,What month is the concert scheduled,July,month,easy
+time_date_14,time_date,Practice starts at four forty,When does practice start,four forty,time,medium
+time_date_15,time_date,The bakery opens in May,What month does the bakery open,May,month,easy
+time_date_16,time_date,We clean the room on Wednesday,What day do we clean the room,Wednesday,weekday,easy
+time_date_17,time_date,The movie begins at five,When does the movie begin,five,time,easy
+time_date_18,time_date,The garden club meets in March,When does the garden club meet,March,month,easy
+time_date_19,time_date,The game starts on Sunday,What day does the game start,Sunday,weekday,easy
+time_date_20,time_date,Breakfast starts at ten twenty,When does breakfast start,ten twenty,time,medium
+named_entity_location_01,named_entity_location,Anna moved to Boston last spring,Who moved to Boston,Anna,person,easy
+named_entity_location_02,named_entity_location,Leo found a cafe in Denver,Where did Leo find a cafe,Denver,city,easy
+named_entity_location_03,named_entity_location,Maya waited near Central Park,Where did Maya wait,Central Park,location,easy
+named_entity_location_04,named_entity_location,Owen lives beside Maple Street,Where does Owen live beside,Maple Street,location,easy
+named_entity_location_05,named_entity_location,Nina bought flowers in Dallas,Who bought flowers in Dallas,Nina,person,easy
+named_entity_location_06,named_entity_location,Eli met friends at River Mall,Where did Eli meet friends,River Mall,location,easy
+named_entity_location_07,named_entity_location,Sara travels to Austin each summer,Where does Sara travel,Austin,city,easy
+named_entity_location_08,named_entity_location,Ben studies music in Portland,Who studies music in Portland,Ben,person,easy
+named_entity_location_09,named_entity_location,Lila swims at Pine Lake,Where does Lila swim,Pine Lake,location,easy
+named_entity_location_10,named_entity_location,Noah brought snacks to Seattle,Where did Noah bring snacks,Seattle,city,easy
+named_entity_location_11,named_entity_location,Emma visits Oak Library after school,Where does Emma visit after school,Oak Library,location,easy
+named_entity_location_12,named_entity_location,Jack rode his bike in Phoenix,Who rode his bike in Phoenix,Jack,person,easy
+named_entity_location_13,named_entity_location,Zoe paints signs at Hill Market,Where does Zoe paint signs,Hill Market,location,easy
+named_entity_location_14,named_entity_location,Liam found shells near Miami,Where did Liam find shells,Miami,city,easy
+named_entity_location_15,named_entity_location,Ivy works at Sunny Cafe,Where does Ivy work,Sunny Cafe,location,easy
+named_entity_location_16,named_entity_location,Max planted herbs in Chicago,Who planted herbs in Chicago,Max,person,easy
+named_entity_location_17,named_entity_location,Ruby waits outside Cedar School,Where does Ruby wait,Cedar School,location,easy
+named_entity_location_18,named_entity_location,Finn visits Tampa for camp,Where does Finn visit,Tampa,city,easy
+named_entity_location_19,named_entity_location,Clara reads quietly at North Beach,Where does Clara read quietly,North Beach,location,easy
+named_entity_location_20,named_entity_location,Sam sells postcards in Orlando,Who sells postcards in Orlando,Sam,person,easy
+semantic_fact_01,semantic_fact,The blue mug holds warm tea,What holds warm tea,blue mug,object,easy
+semantic_fact_02,semantic_fact,The small dog chased a ball,What did the small dog chase,ball,object,easy
+semantic_fact_03,semantic_fact,The boy packed apples for lunch,What did the boy pack,apples,object,easy
+semantic_fact_04,semantic_fact,The red bike needs air,What needs air,red bike,object,easy
+semantic_fact_05,semantic_fact,The cat slept on the sofa,Where did the cat sleep,sofa,place,easy
+semantic_fact_06,semantic_fact,The girl watered plants before dinner,What did the girl water,plants,object,easy
+semantic_fact_07,semantic_fact,The green hat belongs to grandpa,What belongs to grandpa,green hat,object,easy
+semantic_fact_08,semantic_fact,The lamp stays on for reading,Why does the lamp stay on,reading,reason,easy
+semantic_fact_09,semantic_fact,The backpack feels heavy with books,Why does the backpack feel heavy,books,reason,easy
+semantic_fact_10,semantic_fact,The rabbit likes fresh carrots,What does the rabbit like,fresh carrots,preference,easy
+semantic_fact_11,semantic_fact,The kite flew above the field,Where did the kite fly,field,place,easy
+semantic_fact_12,semantic_fact,The orange chair is for guests,Who is the orange chair for,guests,person_group,easy
+semantic_fact_13,semantic_fact,The bread smells sweet after baking,When does the bread smell sweet,after baking,time,easy
+semantic_fact_14,semantic_fact,The pencil rolled under the desk,Where did the pencil roll,under the desk,place,easy
+semantic_fact_15,semantic_fact,The child chose soup for dinner,What did the child choose,soup,object,easy
+semantic_fact_16,semantic_fact,The window opened for fresh air,Why did the window open,fresh air,reason,easy
+semantic_fact_17,semantic_fact,The blanket kept the baby warm,What kept the baby warm,blanket,object,easy
+semantic_fact_18,semantic_fact,The basket carries ripe peaches,What does the basket carry,ripe peaches,object,easy
+semantic_fact_19,semantic_fact,The drummer prefers quiet mornings,What does the drummer prefer,quiet mornings,preference,easy
+semantic_fact_20,semantic_fact,The candle glowed during dinner,When did the candle glow,during dinner,time,easy
