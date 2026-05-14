@@ -220,24 +220,35 @@ def attack_folder(
     step_size: float,
     steps: int,
     limit: int | None,
+    start_index: int,
+    skip_existing: bool,
 ) -> None:
     ground_truth = load_ground_truth(reference_csv)
     processor, model, device, dtype = load_whisper(model_name, device_setting)
 
     wav_paths = sorted(clean_dir.glob("*.wav"))
+    if start_index < 1:
+        raise ValueError("--start-index must be 1 or greater")
+    if start_index > 1:
+        wav_paths = wav_paths[start_index - 1 :]
     if limit is not None:
         wav_paths = wav_paths[:limit]
     if not wav_paths:
         raise FileNotFoundError(f"No .wav files found in {clean_dir}")
 
     output_dir.mkdir(parents=True, exist_ok=True)
-    for index, wav_path in enumerate(wav_paths, start=1):
+    for index, wav_path in enumerate(wav_paths, start=start_index):
+        output_path = output_dir / wav_path.name
+        if skip_existing and output_path.exists():
+            print(f"[{index}/{start_index + len(wav_paths) - 1}] Skipping existing {wav_path.name}")
+            continue
+
         audio_id = wav_path.stem
         transcript = ground_truth.get(audio_id)
         if transcript is None:
             raise KeyError(f"No ground-truth transcript found for {audio_id}")
 
-        print(f"[{index}/{len(wav_paths)}] Attacking {wav_path.name}: {transcript}")
+        print(f"[{index}/{start_index + len(wav_paths) - 1}] Attacking {wav_path.name}: {transcript}")
         audio_np, sample_rate, subtype = read_wav(wav_path)
         adversarial = pgd_attack(
             audio_np=audio_np,
@@ -250,7 +261,7 @@ def attack_folder(
             step_size=step_size,
             steps=steps,
         )
-        write_wav(output_dir / wav_path.name, adversarial, sample_rate, subtype)
+        write_wav(output_path, adversarial, sample_rate, subtype)
 
     print(f"Wrote adversarial WAVs to {output_dir}")
 
@@ -311,6 +322,17 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help="Optional number of files to attack for testing.",
     )
+    parser.add_argument(
+        "--start-index",
+        type=int,
+        default=1,
+        help="1-based position in the sorted input .wav list to start from.",
+    )
+    parser.add_argument(
+        "--skip-existing",
+        action="store_true",
+        help="Skip files whose output .wav already exists.",
+    )
     return parser.parse_args()
 
 
@@ -326,6 +348,8 @@ def main() -> None:
         step_size=args.step_size,
         steps=args.steps,
         limit=args.limit,
+        start_index=args.start_index,
+        skip_existing=args.skip_existing,
     )
 
 
