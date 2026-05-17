@@ -32,9 +32,16 @@ models/
 # Generated datasets and outputs
 ready/random*/
 ready/pgd*/
+ready/run_2.csv
+ready/run_3.csv
+ready/run_4.csv
+ready/run_5.csv
 ready/*_whisper_large_v3.csv
 ready/*_qwen2_audio_answers.csv
-
+ready/*_run2.csv
+ready/*_run3.csv
+ready/*_run4.csv
+ready/*_run5.csv
 # Bundled/generated tool artifacts
 ready/tools/
 ready/piper/

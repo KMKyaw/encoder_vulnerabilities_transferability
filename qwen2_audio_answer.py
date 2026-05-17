@@ -70,7 +70,20 @@ def choose_torch_dtype(torch_module: Any, device: str) -> Any:
     return torch_module.float16
 
 
-def load_qwen2_audio(model_path: Path, device: str):
+def build_max_memory(torch_module: Any, gpu_memory: str, cpu_memory: str) -> dict[Any, str]:
+    max_memory: dict[Any, str] = {"cpu": cpu_memory}
+    for gpu_index in range(torch_module.cuda.device_count()):
+        max_memory[gpu_index] = gpu_memory
+    return max_memory
+
+
+def load_qwen2_audio(
+    model_path: Path,
+    device: str,
+    gpu_memory: str,
+    cpu_memory: str,
+    offload_folder: Path,
+):
     import torch
     from transformers import AutoProcessor, Qwen2AudioForConditionalGeneration
 
@@ -79,16 +92,22 @@ def load_qwen2_audio(model_path: Path, device: str):
     torch_dtype = choose_torch_dtype(torch, device)
 
     if device == "auto":
+        offload_folder.mkdir(parents=True, exist_ok=True)
         model = Qwen2AudioForConditionalGeneration.from_pretrained(
             resolved_path,
             torch_dtype=torch_dtype,
             device_map="auto",
+            max_memory=build_max_memory(torch, gpu_memory, cpu_memory),
+            offload_folder=offload_folder,
+            offload_state_dict=True,
+            low_cpu_mem_usage=True,
             trust_remote_code=True,
         )
     else:
         model = Qwen2AudioForConditionalGeneration.from_pretrained(
             resolved_path,
             torch_dtype=torch_dtype,
+            low_cpu_mem_usage=True,
             trust_remote_code=True,
         ).to(device)
 
@@ -104,22 +123,13 @@ def build_prompt(question: str) -> str:
     return (
         "Listen to the audio and answer the question.\n"
         "Return only the short answer. Do not write a sentence. Do not explain.\n"
-        "Examples:\n"
-        "Audio: Our table number is 56A tonight. Question: What is the table number? "
-        "Answer: 56A\n"
-        "Audio: The meeting is on Sunday. Question: What day is the meeting? "
-        "Answer: Sunday\n"
-        "Audio: The report is due in March. Question: Which month is the report due? "
-        "Answer: March\n"
-        f"Question: {question}\n"
-        "Answer:"
     )
 
 
 def answer_audio(processor, model, audio_path: Path, question: str, max_new_tokens: int) -> str:
     import librosa
     import torch
-
+    print(f"Answering {audio_path.name} question: {question}")
     conversation = [
         {
             "role": "user",
@@ -142,7 +152,8 @@ def answer_audio(processor, model, audio_path: Path, question: str, max_new_toke
     )
     inputs = processor(
         text=text,
-        audios=[audio],
+        audio=[audio],
+        sampling_rate=processor.feature_extractor.sampling_rate,
         return_tensors="pt",
         padding=True,
     )
@@ -245,6 +256,22 @@ def parse_args() -> argparse.Namespace:
         default=16,
         help="Maximum generated tokens for the short answer.",
     )
+    parser.add_argument(
+        "--gpu-memory",
+        default="8GiB",
+        help="Per-GPU memory limit for --device auto, e.g. 8GiB or 9GiB.",
+    )
+    parser.add_argument(
+        "--cpu-memory",
+        default="48GiB",
+        help="CPU RAM limit for --device auto offloading.",
+    )
+    parser.add_argument(
+        "--offload-folder",
+        type=Path,
+        default=Path(".cache/qwen2_audio_offload"),
+        help="Folder for model weights offloaded by accelerate.",
+    )
     return parser.parse_args()
 
 
@@ -255,7 +282,13 @@ def main() -> None:
         output_csv = Path("ready") / f"{args.audio_dir.name}_qwen2_audio_answers.csv"
 
     metadata = load_metadata(args.reference_csv)
-    processor, model = load_qwen2_audio(args.model_path.expanduser(), args.device)
+    processor, model = load_qwen2_audio(
+        model_path=args.model_path.expanduser(),
+        device=args.device,
+        gpu_memory=args.gpu_memory,
+        cpu_memory=args.cpu_memory,
+        offload_folder=args.offload_folder,
+    )
     write_answers(
         audio_dir=args.audio_dir,
         output_csv=output_csv,
